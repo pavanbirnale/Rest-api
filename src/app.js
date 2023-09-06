@@ -51,6 +51,7 @@ app.get('/students',async(req,res)=>{
 })
 // ******************** read data from the database end******
 
+
 //***********************/ get the individual data by id start
 
 app.get('/students/:id',async(req,res)=>{
@@ -72,6 +73,24 @@ app.get('/students/:id',async(req,res)=>{
 })
 
 //***********************/ get the individual data by id end
+
+
+// *****************delete data by id start
+
+app.delete('/student/:id',async(req,res)=>{
+     try {
+        const deleteStudent= await student.findByIdAndDelete(req.params.id);
+        if(!req.params.id){
+          return req.status(500).send();
+        }else{
+          res.status(200).send(deleteStudent);
+        }
+     } catch (error) {
+        res.status(500).send(error);
+     }
+})
+
+// *****************delete data by id end
 
 app.listen(port,()=>{
     console.log(`listening to the port no ${port}`);
