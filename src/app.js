@@ -38,6 +38,21 @@ app.post('/students',async(req,res)=>{
 //*****************using async await end**********
 
 
+// ******************** read data from the database start******
+
+app.get('/students',async(req,res)=>{
+    try {
+        const studentData= await student.find();
+        console.log(studentData)
+        res.send(studentData);
+    } catch (error) {
+        res.send(error);
+    }
+})
+
+// ******************** read data from the database end******
+
+
 app.listen(port,()=>{
     console.log("listioning to the port no 3000");
 })
