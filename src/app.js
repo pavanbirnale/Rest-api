@@ -89,8 +89,22 @@ app.delete('/student/:id',async(req,res)=>{
         res.status(500).send(error);
      }
 })
-
 // *****************delete data by id end
+
+// ********************update document start
+
+app.patch('/student/:id',async(req,res)=>{
+    try {
+        const updateStudent = await student.findByIdAndUpdate(req.params.id,req.body,{ new : true});
+         res.send(updateStudent);
+         console.log(updateStudent);
+    } catch (error) {
+        res.status(400).send(error);
+    }
+})
+
+// ********************update document end
+
 
 app.listen(port,()=>{
     console.log(`listening to the port no ${port}`);
