@@ -49,10 +49,30 @@ app.get('/students',async(req,res)=>{
         res.send(error);
     }
 })
-
 // ******************** read data from the database end******
 
+//***********************/ get the individual data by id start
+
+app.get('/students/:id',async(req,res)=>{
+    try {
+        const _id = req.params.id;
+        const studentData = await student.findById(_id);
+        console.log(studentData);
+
+        if(!studentData)
+        {
+            return res.status(404).send();
+        }
+        else{
+           res.send(studentData);
+        }
+    } catch (error) {
+        res.status(500).send(error);
+    }
+})
+
+//***********************/ get the individual data by id end
 
 app.listen(port,()=>{
-    console.log("listioning to the port no 3000");
+    console.log(`listening to the port no ${port}`);
 })
